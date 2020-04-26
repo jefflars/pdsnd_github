@@ -45,7 +45,7 @@ def get_filters():
     print('\n' * 2)
     print('-' * 40)
 
-    # gets user to input desire to filter data
+    # prompts user to select desire to work with filtered data
     print("Data is available for January-June 2017.\nYou can choose to see all data, or filter the data by a specific "
           "month and/or the day of the week.\n")
     while True:

@@ -25,6 +25,26 @@ def month_data():
             continue
     return month
 
+
+def day_data():
+    while True:
+        print('-' * 40)
+        try:
+            z = int(input("Please enter the day of the week, in integer form, for which you would like data."
+                          "\n(E.g. 0 for Sunday, 1 for Monday, ...)\n"))
+            if int(z) in days_of_week.keys():
+                day = z
+                month = 'none'
+                break
+            else:
+                print("\nDay not recognized.\n")
+                continue
+        except ValueError:
+            print('\nDay not recognized.')
+            print('\n')
+    return day
+
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -90,82 +110,25 @@ def get_filters():
         while True:
             print('-' * 40)
             x = input('Would you like to filter data by month, day, or both?\n')
-            second_filter = ''
             if x.lower() == 'month':
                 month = month_data()
                 month_name = reverse_months[month]
                 day = 'none'
-                second_filter = 'month'
                 break
             elif x.lower() == 'day':
-                second_filter = x
+                day = day_data()
+                day_name = days_of_week[day]
                 month = 'none'
                 break
             elif x.lower() == 'both':
-                second_filter = x
+                month = month_data()
+                month_name = reverse_months[month]
+                day = day_data()
+                day_name = days_of_week[day]
                 break
             else:
                 print("\nChoice not recognized\n")
                 continue
-
-        # spacing
-        print('\n' * 2)
-
-        # gets user input when only filtering for month
-        if second_filter == 'month':
-            # month filter
-            # get user input for month (all, january, february, ... , june)
-            print('Getting data')
-
-        # gets user input when only filtering for day
-        elif second_filter == 'day':
-            # day filter
-            # get user input for day of week (all, monday, tuesday, ... sunday)
-            while True:
-                print('-' * 40)
-                try:
-                    z = int(input("Please enter the day of the week, in integer form, for which you would like data."
-                                  "\n(E.g. 0 for Sunday, 1 for Monday, ...)\n"))
-                    if int(z) in days_of_week.keys():
-                        day = z
-                        month = 'none'
-                        day_name = days_of_week[z]
-                        break
-                    else:
-                        print("\nDay not recognized.\n")
-                        continue
-                except ValueError:
-                    print('\nDay not recognized.')
-                    print('\n')
-
-        # gets user input when filtering for both month and day
-        else:
-            # month filter
-            # get user input for month (all, january, february, ... , june)
-            month = month_data()
-            month_name = reverse_months[month]
-
-            # spacing
-            print('\n')
-
-            # day filter
-            # get user input for day of week (all, monday, tuesday, ... sunday)
-            while True:
-                print('-' * 40)
-                try:
-                    z = int(input("Please enter the day of the week, in integer form, for which you would like data."
-                                  "\n(E.g. 0 for Sunday, 1 for Monday, ...)\n"))
-                    if int(z) in days_of_week.keys():
-                        day = z
-                        month = 'none'
-                        day_name = days_of_week[z]
-                        break
-                    else:
-                        print("\nDay not recognized.\n")
-                        continue
-                except ValueError:
-                    print('\nDay not recognized.')
-                    print('\n')
 
     # spacing
     print('\n')

@@ -9,6 +9,21 @@ months = {"january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june":
 reverse_months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June'}
 days_of_week = {0: "sunday", 1: "monday", 2: "tuesday", 3: "wednesday", 4: "thursday", 5: "friday", 6: "saturday"}
 
+def month_data():
+    month_name = ''
+    month = ''
+    months = {"january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6}
+    while True:
+        print('-' * 40)
+        y = input("Please enter a month. (E.g. January)\nData is only available for January-June.\n")
+        if y.lower() in months.keys():
+            month = months[y.lower()]
+            month_name = y.title()
+            break
+        else:
+            print("\nMonth not recognized.\n")
+            continue
+    return month
 
 def get_filters():
     """
@@ -77,10 +92,14 @@ def get_filters():
             x = input('Would you like to filter data by month, day, or both?\n')
             second_filter = ''
             if x.lower() == 'month':
-                second_filter = x
+                month = month_data()
+                month_name = reverse_months[month]
+                day = 'none'
+                second_filter = 'month'
                 break
             elif x.lower() == 'day':
                 second_filter = x
+                month = 'none'
                 break
             elif x.lower() == 'both':
                 second_filter = x
@@ -96,17 +115,7 @@ def get_filters():
         if second_filter == 'month':
             # month filter
             # get user input for month (all, january, february, ... , june)
-            while True:
-                print('-' * 40)
-                y = input("Please enter a month. (E.g. January)\nData is only available for January-June.\n")
-                if y.lower() in months.keys():
-                    month = months[y.lower()]
-                    month_name = y.title()
-                    day = 'none'
-                    break
-                else:
-                    print("\nMonth not recognized.\n")
-                    continue
+            print('Getting data')
 
         # gets user input when only filtering for day
         elif second_filter == 'day':
@@ -133,16 +142,8 @@ def get_filters():
         else:
             # month filter
             # get user input for month (all, january, february, ... , june)
-            while True:
-                print('-' * 40)
-                y = input("Please enter a month. (E.g. January)\nData is only available for January-June.\n")
-                if y.lower() in months.keys():
-                    month = months[y.lower()]
-                    month_name = y.title()
-                    break
-                else:
-                    print("\nMonth not recognized.\n")
-                    continue
+            month = month_data()
+            month_name = reverse_months[month]
 
             # spacing
             print('\n')
